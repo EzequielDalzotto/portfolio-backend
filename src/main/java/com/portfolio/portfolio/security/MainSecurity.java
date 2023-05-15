@@ -6,7 +6,6 @@ package com.portfolio.portfolio.security;
 
 import com.portfolio.portfolio.security.jwt.JwtEntryPoint;
 import com.portfolio.portfolio.security.jwt.JwtTokenFilter;
-import com.portfolio.portfolio.security.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
