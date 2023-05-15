@@ -2,51 +2,31 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.portfolio.portfolio.entity;
+package com.portfolio.portfolio.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 
 /**
  *
  * @author Ezequiel
  */
-@Entity
-public class Experiencia {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @NotNull
+public class DtoExperiencia {
+    @NotBlank
     private String img;
-    @NotNull
+    @NotBlank
     private String titulo;
-    @NotNull
+    @NotBlank
     private String descripcion;
-    
-    //Constructores
 
-    public Experiencia() {
+    public DtoExperiencia() {
     }
 
-    public Experiencia(String img, String titulo, String descripcion) {
+    public DtoExperiencia(String img, String titulo, String descripcion) {
         this.img = img;
         this.titulo = titulo;
         this.descripcion = descripcion;
     }
-    
-    //Getters and setters
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-    
     public String getImg() {
         return img;
     }
@@ -54,7 +34,7 @@ public class Experiencia {
     public void setImg(String img) {
         this.img = img;
     }
-    
+
     public String getTitulo() {
         return titulo;
     }
@@ -70,5 +50,6 @@ public class Experiencia {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+    
     
 }
