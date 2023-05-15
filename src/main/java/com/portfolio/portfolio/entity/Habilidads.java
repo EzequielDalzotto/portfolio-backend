@@ -10,25 +10,26 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 
-
 /**
  *
  * @author Ezequiel
  */
 @Entity
-public class Habilidad {
+public class Habilidads {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
     @NotNull
     private String nombre;
+    
     @NotNull
     private int porcentaje;
 
-    public Habilidad() {
+    public Habilidads() {
     }
 
-    public Habilidad(String nombre, int porcentaje) {
+    public Habilidads(String nombre, int porcentaje) {
         this.nombre = nombre;
         this.porcentaje = porcentaje;
     }
@@ -56,4 +57,8 @@ public class Habilidad {
     public void setPorcentaje(int porcentaje) {
         this.porcentaje = porcentaje;
     }
+
+    
+    
+    
 }
