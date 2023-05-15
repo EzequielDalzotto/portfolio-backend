@@ -2,42 +2,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.portfolio.portfolio.entity;
+package com.portfolio.portfolio.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 
 /**
  *
  * @author Ezequiel
  */
-@Entity
-public class Certificado {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @NotNull
+public class DtoCertificado {
+    @NotBlank
     private String nombre;
-    @NotNull
+    @NotBlank
     private String img;
 
-    public Certificado() {
+    public DtoCertificado() {
     }
 
-    public Certificado( String nombre, String img) {
+    public DtoCertificado(String nombre, String img) {
         this.nombre = nombre;
         this.img = img;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNombre() {
@@ -55,6 +39,9 @@ public class Certificado {
     public void setImg(String img) {
         this.img = img;
     }
+
     
-    
+
 }
+    
+
