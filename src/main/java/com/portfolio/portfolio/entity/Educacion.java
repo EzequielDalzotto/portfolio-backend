@@ -57,7 +57,7 @@ public class Educacion {
         this.titulo = titulo;
     }
     
-    public String getPeriodoe(){
+    public String getPeriodo(){
         return periodo;
     }
     

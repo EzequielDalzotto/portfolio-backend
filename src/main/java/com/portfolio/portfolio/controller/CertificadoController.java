@@ -13,6 +13,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,17 +30,17 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("certs")
-@CrossOrigin(origins = "https://ezequieldalzottoportfolio.web.app")
+@CrossOrigin(origins = {"https://ezequieldalzottoportfolio.web.app","http://localhost:4200"})
 public class CertificadoController {
     @Autowired
     SCertificado sCertificado;
-    
+
     @GetMapping("/lista")
     public ResponseEntity<List<Certificado>> list(){
         List<Certificado> list = sCertificado.list();
         return new ResponseEntity(list, HttpStatus.OK);
     }
-    
+
     @GetMapping("/detail/{id}")
     public ResponseEntity<Certificado> getById(@PathVariable("id") int id){
         if(!sCertificado.existsById(id))
@@ -47,7 +48,8 @@ public class CertificadoController {
         Certificado certificado = sCertificado.getOne(id).get();
         return new ResponseEntity(certificado, HttpStatus.OK);
     }
-    
+
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody DtoCertificado dtocert){      
         if(StringUtils.isBlank(dtocert.getNombre()))
@@ -60,7 +62,8 @@ public class CertificadoController {
         
         return new ResponseEntity(new Mensaje("Certificado agregada"), HttpStatus.OK);
     }
-    
+
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody DtoCertificado dtocert){
         //Validamos si existe el ID
@@ -81,7 +84,8 @@ public class CertificadoController {
         return new ResponseEntity(new Mensaje("Certificado actualizada"), HttpStatus.OK);
              
     }
-    
+
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id) {
         if (!sCertificado.existsById(id)) {

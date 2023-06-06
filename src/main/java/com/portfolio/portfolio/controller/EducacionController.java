@@ -13,6 +13,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("edu")
-@CrossOrigin(origins = "https://ezequieldalzottoportfolio.web.app")
+@CrossOrigin(origins = {"https://ezequieldalzottoportfolio.web.app","http://localhost:4200"})
 public class EducacionController {
     @Autowired
     SEducacion seducacion;
@@ -39,7 +40,8 @@ public class EducacionController {
        List<Educacion> list = seducacion.list();
        return new ResponseEntity(list, HttpStatus.OK);
     }
-    
+
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id) {
         if (!seducacion.existsById(id)) {
@@ -48,7 +50,8 @@ public class EducacionController {
         seducacion.delete(id);
         return new ResponseEntity(new Mensaje("Educacion eliminada"), HttpStatus.OK);
     }
-    
+
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody DtoEducacion dtoedu){      
         if(StringUtils.isBlank(dtoedu.getTitulo()))
@@ -61,7 +64,8 @@ public class EducacionController {
         
         return new ResponseEntity(new Mensaje("Educacion agregada"), HttpStatus.OK);
     }
-    
+
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody DtoEducacion dtoexp){
         //Validamos si existe el ID
